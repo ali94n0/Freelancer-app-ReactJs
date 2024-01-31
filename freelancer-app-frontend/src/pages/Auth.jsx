@@ -9,14 +9,13 @@ import { getOtp } from "../services/authService";
 function Auth() {
     const [step,setStep] = useState(1)
     const [phoneNumber,setPhoneNumber] = useState("")
-
     const {isPending:isSendingOtp,mutateAsync,data:otpResponse}=useMutation({
         mutationFn:getOtp,
     
     })
     
+    //send phoneNumber to get new OTP token
         const  sendOtpHandler= async (e)=>{
-
             e.preventDefault();
             try {
                 const data = await mutateAsync({phoneNumber});
@@ -28,6 +27,8 @@ function Auth() {
             }
     
         }
+
+        //render what step the user should be see on display
     const renderStep = ()=>{
         switch (step) {
             case 1:

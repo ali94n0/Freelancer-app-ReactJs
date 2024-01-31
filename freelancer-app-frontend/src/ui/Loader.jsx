@@ -1,5 +1,5 @@
 import {ThreeDots} from "react-loader-spinner"
-
+//render Loader spinner (three dots)
 function Loader({width=75,height=75}) {
     return (
         <div className="w-full flex justify-center items-center">

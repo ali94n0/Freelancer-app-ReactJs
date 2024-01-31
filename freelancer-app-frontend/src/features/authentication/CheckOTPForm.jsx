@@ -3,21 +3,24 @@ import OtpInput from 'react-otp-input';
 import {useMutation} from "@tanstack/react-query"
 import { checkOtp } from '../../services/authService';
 import {toast} from "react-hot-toast";
-import {HiArrowRight} from "react-icons/hi"
 import {CiEdit} from "react-icons/ci"
-// import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
+import Loader from '../../ui/Loader';
+import BackBtn from '../../ui/BackBtn';
 
-const RESEND_TIME = 10;
+// otp resend timer
+const RESEND_TIME = 90;
 
 function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
     const [otp, setOtp] = useState('');
     const[time,setTime] = useState(RESEND_TIME)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
+  
 
-    const{mutateAsync}=useMutation({
+    const{mutateAsync,isPending}=useMutation({
         mutationFn: checkOtp,
     })
-
+    // resend timer fx
     useEffect(()=>{
         const timer = time > 0 && setInterval(() => {
             setTime(t=>t-1)
@@ -27,24 +30,31 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
         }
     },[time])
 
+    // send otp to api fx
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try {
            const {user,message} = await mutateAsync({phoneNumber , otp});
            toast.success(message)
         //    navigate("/complete-user")
-        if(user.isActive){
-        //
-            if(user?.role === "OWNER"){
-                //
-            }if(user?.role === "FREELANCER"){
-                //
-            }
-        }else{
-        //
+        if(!user.isActive){
+            return navigate("/complete-profile")
+        }
+        if(user.status !== 2){
+            navigate("/")
+            toast('پروفایل شما در انتظار تایید است', {
+                icon: '⏳',
+              });
+              return;
+        }
+        if(user?.role === "OWNER"){
+            return navigate("/owner")
+        }
+        if(user?.role === "FREELANCER"){
+            return navigate("/freelancer")
         }
         } catch (error) {
-            console.log(error);
+
             toast.error(error?.response?.data?.message)
         }
     }
@@ -53,10 +63,8 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
     
     return (
         <div>
-            <button className='flex justify-center items-center text-red-400 border border-red-400 rounded-lg px-2 py-1 mb-5' onClick={onBack}>
-               <HiArrowRight className='ml-2' /> 
-               بازگشت
-            </button>
+            
+            <BackBtn onBack={onBack}/>
             <div className="w-full flex items-center  p-2 bg-secondary-50 rounded-lg gap-x-2">
                 {otpResponse && <p className='text-secondary-500 text-sm md:text-base'>
                     {otpResponse?.message}
@@ -81,7 +89,7 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
                     setTime(RESEND_TIME)
                 }}>ارسال مجدد کد تایید</button>}
             </div>
-            <button className='btn btn--primary w-full'>تایید</button>
+            {isPending ? <Loader/> : <button className="btn btn--primary w-full" type="submit">تایید</button>}
             </form>
 
         </div>
