@@ -13,3 +13,7 @@ export const completeProfile = (data) => {
     .post("/user/complete-profile", data)
     .then(({ data }) => data.data);
 };
+
+export const getUser = () => {
+  return http.get("/user/profile").then(({ data }) => data.data);
+};

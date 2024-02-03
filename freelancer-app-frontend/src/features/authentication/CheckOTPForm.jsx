@@ -69,11 +69,11 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
                 {otpResponse && <p className='text-secondary-500 text-sm md:text-base'>
                     {otpResponse?.message}
                     </p>}
-                    <button className='text-xl text-primary-900 p-1' onClick={onBack}><CiEdit /></button>
+                    <button className='text-xl text-primary-900 p-1' onClick={onBack}><CiEdit className='w-6 h-6'/></button>
                 
             </div>
-            <form className='space-y-5' onSubmit={handleSubmit}>
-                <p className='text-secondary-800 font-bold p-1'>کد تایید را وارد کنید</p>
+            <form className='space-y-7' onSubmit={handleSubmit}>
+                <p className='text-secondary-700 font-bold px-1 py-2 mt-4'>کد تایید را وارد کنید</p>
                 <OtpInput
             value={otp}
             onChange={setOtp}
@@ -83,7 +83,7 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
             containerStyle="flex flex-row-reverse gap-x-2 justify-center"
             inputStyle="!w-10 p-2 rounded-lg border border-primary-300 text-secondary-700 bg-secondary-100"
             />
-            <div className={`my-2 w-full flex justify-center items-center   text-sm md:text-base rounded-lg ${time > 0 ? "bg-orange-50" : "bg-green-50" }`}>
+            <div className={`my-2 w-full flex justify-center items-center   text-sm md:text-base rounded-lg ${time > 0 ? "bg-orange-50/70" : "bg-green-50/70" }`}>
                 {time > 0 ? <p className='p-2 text-warning'>{time} ثانیه تا ارسال مجدد کد.</p> : <button className='btn text-green-500' onClick={(e)=>{
                     onResendOtp(e);
                     setTime(RESEND_TIME)

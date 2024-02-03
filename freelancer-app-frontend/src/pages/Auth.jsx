@@ -40,7 +40,11 @@ function Auth() {
         }
     }
 
-    return (<div className=" w-full mt-20 sm:max-w-sm">{renderStep()}</div>
+    return (
+    <div className="container xl:max-w-screen-xl flex justify-center">
+
+    <div className=" w-full mt-20 py-5 sm:max-w-sm">{renderStep()}</div>
+    </div>
     );
 }
 
