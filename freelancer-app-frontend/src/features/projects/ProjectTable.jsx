@@ -12,22 +12,23 @@ function ProjectTable({projects}) {
        
        return (
            <Table>
-               <Table.Header>
-                   <th>#</th>
+               <Table.Header >
+                   <th >#</th>
                    <th>عنوان پروژه</th>
                    <th>دسته بندی</th>
-                   <th>بودجه</th>
+                   <th>بودجه (تومان)</th>
                    <th>ددلاین</th>
                    <th>تگ ها</th>
                    <th>فریلنسر</th>
                    <th>وضعیت</th>
-                   <th>عملیات</th>
+                   <th >عملیات</th>
+                   <th>درخواست ها</th>
                </Table.Header>
                <Table.Body>
    
                    {projects.map((project,index)=><ProjectRow project={project} index={index} key={project._id}/>)}
    
-                       </Table.Body>
+                </Table.Body>
                    
            </Table>
        );

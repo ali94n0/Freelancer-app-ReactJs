@@ -1,10 +1,14 @@
 
 //render textInput
-function TextField({name,value,label,onChange,required=true,dir="",type}) {
+function TextField({name,label,dir="",type,register,errors,validationSchema}) {
+
     return (
-        <div>
-                    <label htmlFor={name} className="block mb-3 p-1">{label}</label>
-                    <input required={required} className={`textField__input ${dir}`} type={type} id={name} name={name}  value={value} onChange={onChange} autoComplete="off"/>
+        <div className="mb-2">
+                    <label htmlFor={name}  className="block mb-1 p-1 text-secondary-700">
+                        {label}{validationSchema.required && <span className="text-error px-1">*</span>}
+                    </label>
+                    <input  className={`textField__input block ${dir}`} type={type} id={name} name={name}  {...register(name,validationSchema)} autoComplete="off"/>
+                    {errors[name] && <span className="text-error block text-xs mt-1 px-2">{errors[name]?.message}</span>}
         </div>
     );
 }

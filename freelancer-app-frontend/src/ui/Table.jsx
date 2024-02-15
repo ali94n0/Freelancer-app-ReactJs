@@ -14,17 +14,17 @@ export default Table;
 
 function tableHeader ({children}){
     return(
-        <tr className="table-row">{children}</tr>
+        <tr className="table-row ">{children}</tr>
     )
 }
 function tableBody({children}){
     return(
-        <tbody>{children}</tbody>
+        <tbody >{children}</tbody>
     )
 }
 function tableRow({children}){
     return(
-        <tr>{children}</tr>
+        <tr >{children}</tr>
     )
 }
 

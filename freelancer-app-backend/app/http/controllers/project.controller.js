@@ -43,7 +43,7 @@ class ProjectController extends Controller {
     if (search) dbQuery["$text"] = { $search: search };
 
     // STATUS
-    if (["OPEN", "CLOSED"].includes(status)) {
+    if (["OPEN", "CLOSE"].includes(status)) {
       dbQuery["status"] = { $eq: status };
     }
     // CATEGORY

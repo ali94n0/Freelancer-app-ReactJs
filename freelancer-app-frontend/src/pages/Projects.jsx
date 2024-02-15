@@ -1,4 +1,5 @@
 
+import ProjectHeader from "../features/projects/ProjectHeader";
 import ProjectTable from "../features/projects/ProjectTable";
 import useOwnerProjects from "../features/projects/useOwnerProjects";
 import Empty from "../ui/Empty";
@@ -10,11 +11,12 @@ function Projects() {
 
 
  if(isLoading)return <Loader/>;
- if(!projects.length)return <Empty/>
+ if(!projects?.length)return <Empty/>
 
     
     return (
         <div>
+            <ProjectHeader/>
             <ProjectTable projects={projects}/>
         </div>
     );

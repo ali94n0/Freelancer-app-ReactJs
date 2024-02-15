@@ -5,16 +5,26 @@ import {Toaster} from "react-hot-toast"
 import CompleteProfile from "./pages/CompleteProfile";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import AppLayout from "./ui/AppLayout";
+
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import OwnerDashboard from "./pages/OwnerDashboard";
+import { DarkModeProvider } from "./context/DarkModeContext";
+import OwnerLayout from "./features/owner/OwnerLayout";
+import FreelancerLayout from "./features/freelancer/FreelancerLayout";
+import FreelancerDashboard from "./pages/FreelancerDashboard";
+import Proposals from "./pages/Proposals";
+import ProjectsFreelancer from "./pages/ProjectsFreelancer";
 
 const queryClient = new QueryClient();
 
 function App() {
+
+  
   return (
     <>
+    {/* darkmode provider */}
+    <DarkModeProvider>
     {/* provider client for reactQuery */}
     <QueryClientProvider client={
       queryClient
@@ -25,15 +35,23 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="auth" element={<Auth/>}/>
       <Route path="complete-profile" element={<CompleteProfile/>}/>
-      <Route element={<AppLayout/>}>
-        <Route path="owner" element={<Navigate to={"/owner/dashboard"} replace/>}/>
-        <Route path="owner/dashboard" element={<OwnerDashboard/>}/>
-        <Route path="owner/projects" element={<Projects/>}/>
-        <Route path="owner/projects/:id" element={<Project/>}/>
+      <Route path="/owner" element={<OwnerLayout/>}>
+        <Route index  element={<Navigate to={"dashboard"} replace/>}/>
+        <Route path="dashboard" element={<OwnerDashboard/>}/>
+        <Route path="projects" element={<Projects/>}/>
+        <Route path="projects/:id" element={<Project/>}/>
+      </Route>
+      <Route path="/freelancer" element={<FreelancerLayout/>}>
+        <Route index element={<Navigate to={"dashboard"}/>}/>
+        <Route path="dashboard" element={<FreelancerDashboard/>}/>
+        <Route path="projects" element={<ProjectsFreelancer/>}/>
+        <Route path="proposals" element={<Proposals/>}/>
+
       </Route>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
     </QueryClientProvider>
+      </DarkModeProvider>
       </>
   );
 }

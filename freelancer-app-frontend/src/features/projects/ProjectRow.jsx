@@ -1,12 +1,16 @@
 
-import { formatPrice } from "../../utils/CostomizePrice";
+import { formatPrice, toFarsiNumber } from "../../utils/CostomizePrice";
 import Modal from "../../ui/Modal";
-import { HiOutlineTrash } from "react-icons/hi";
+import {  HiEye, HiOutlineTrash } from "react-icons/hi";
 import {TbPencilMinus} from "react-icons/tb"
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useState } from "react";
 import Table from "../../ui/Table";
 import useRemoveProject from "./useRemoveProject";
+import CreateProject from "./CreateProject";
+import truncateString from "../../ui/truncateString";
+import ToggleProjectStatus from "./toggleProjectStatus";
+import {Link} from "react-router-dom"
 
 
 function ProjectRow({project,index}) {
@@ -15,17 +19,20 @@ function ProjectRow({project,index}) {
     const {isDeleting,removeProject} =useRemoveProject()
     return (
         <Table.Row key={project._id}>
-                       <td>{index+1}</td>
-                       <td>{project.title}</td>
+                       <td>{toFarsiNumber(index + 1)}</td>
+                       <td>{truncateString(project.title,15)}</td>
                        <td>{project.category.title}</td>
                        <td>{formatPrice(project.budget)}</td>
                        <td>{new Date(project.deadline).toLocaleDateString("fa-ir")}</td>
-                       <td>{project.tags.map(tag=><span className="badge badge--secondary" key={tag}>
+                       <td className={project?.tags.length && "flex flex-wrap gap-1 items-center max-w-[200px] lg:max-w-[300px]"}>{project?.tags.map(tag=><span className="badge badge--secondary" key={tag}>
                                {tag}
                            </span>)}
                        </td>
                        <td>{project.freelancer?.name || "-"}</td>
-                       <td>{project.status === "OPEN" ? <span className="badge badge--success">باز</span> : <span className="badge badge--danger">بسته</span> }</td>
+                       <td>
+                           <ToggleProjectStatus status={project.status} id={project._id}/> 
+                       {/* {project.status === "OPEN" ? <span className="badge badge--success">باز</span> : <span className="badge badge--danger">بسته</span> } */}
+                       </td>
                        <td>
                            <div className="flex items-center gap-x-3">
                                <>
@@ -33,7 +40,7 @@ function ProjectRow({project,index}) {
                                        <TbPencilMinus className="w-5 h-5 text-primary-900"/>
                                    </button>
                                    <Modal  isOpen={isEditOpen} onClose={()=>setIsEditOpen(false)} title={project.title} >
-                                           hi modal edit
+                                           <CreateProject onClose={()=>setIsEditOpen(false)} projectToEdit={project}/>
                                    </Modal>
                                </>
                                <>
@@ -46,11 +53,18 @@ function ProjectRow({project,index}) {
                                         ()=>removeProject(project._id,{
                                             onSuccess: ()=>setIsDeleteOpen(false)
                                         })
-                                       }/>
+                                       } disabled={isDeleting}/>
                                    </Modal>
                                </>
                            </div>
-   
+                       </td>
+                       <td >
+                        <div className="flex justify-center">
+                        <Link to={`${project._id}`} className="text-primary-800 py-1 px-2">
+                            <HiEye className="w-4 h-4"/>
+                        </Link>
+                        </div>
+                        
                        </td>
                        </Table.Row>
     );

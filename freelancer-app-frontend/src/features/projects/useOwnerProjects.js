@@ -6,11 +6,10 @@ function useOwnerProjects() {
     queryKey: ["owner-projects"],
     queryFn: getOwnerProjectsApi,
     retry: false,
-
     refetchOnWindowFocus: true,
   });
 
-  const { projects } = data || {};
+  const { projects } = data || [];
   return { isLoading, projects };
 }
 

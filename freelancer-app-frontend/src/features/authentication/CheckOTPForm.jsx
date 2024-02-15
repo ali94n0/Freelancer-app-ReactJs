@@ -3,10 +3,10 @@ import OtpInput from 'react-otp-input';
 import {useMutation} from "@tanstack/react-query"
 import { checkOtp } from '../../services/authService';
 import {toast} from "react-hot-toast";
-import {CiEdit} from "react-icons/ci"
 import {useNavigate} from "react-router-dom"
 import Loader from '../../ui/Loader';
 import BackBtn from '../../ui/BackBtn';
+import { HiOutlinePencilAlt } from 'react-icons/hi';
 
 // otp resend timer
 const RESEND_TIME = 90;
@@ -69,7 +69,7 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
                 {otpResponse && <p className='text-secondary-500 text-sm md:text-base'>
                     {otpResponse?.message}
                     </p>}
-                    <button className='text-xl text-primary-900 p-1' onClick={onBack}><CiEdit className='w-6 h-6'/></button>
+                    <button className='text-xl text-primary-900 p-1' onClick={onBack}><HiOutlinePencilAlt className='w-6 h-6'/></button>
                 
             </div>
             <form className='space-y-7' onSubmit={handleSubmit}>
