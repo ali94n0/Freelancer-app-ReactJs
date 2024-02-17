@@ -7,7 +7,7 @@ function FilterDropDown({options,filterField}) {
     
     const[searchParams,setSearchParams]=useSearchParams()
 
-    const value = searchParams.get(filterField) || ""
+    const value = searchParams.get(filterField) || "latest";
 
     const changeHandler = (e)=>{
         searchParams.set(filterField,e.target.value)
@@ -16,7 +16,7 @@ function FilterDropDown({options,filterField}) {
 
     return (
         
-            <Select value={value} onChange={changeHandler} options={options}/>
+            <Select value={value} onChange={(e)=>changeHandler(e)} options={options}/>
         
     );
 }

@@ -11,6 +11,12 @@ import { HiOutlinePencilAlt } from 'react-icons/hi';
 // otp resend timer
 const RESEND_TIME = 90;
 
+const ROLES = {
+    ADMIN:"admin",
+    OWNER:"owner",
+    FREELANCER:"freelancer"
+}
+
 function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
     const [otp, setOtp] = useState('');
     const[time,setTime] = useState(RESEND_TIME)
@@ -29,13 +35,13 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
           if (timer)  clearInterval(timer)
         }
     },[time])
-
     // send otp to api fx
     const handleSubmit = async(e)=>{
         e.preventDefault();
         try {
-           const {user,message} = await mutateAsync({phoneNumber , otp});
-           toast.success(message)
+            const {user,message} = await mutateAsync({phoneNumber , otp});
+            toast.success(message)
+
         //    navigate("/complete-user")
         if(!user.isActive){
             return navigate("/complete-profile")
@@ -47,11 +53,8 @@ function CheckOTPForm({phoneNumber,onBack,onResendOtp,otpResponse}) {
               });
               return;
         }
-        if(user?.role === "OWNER"){
-            return navigate("/owner")
-        }
-        if(user?.role === "FREELANCER"){
-            return navigate("/freelancer")
+        if(user?.role === ROLES[user?.role].toUpperCase()){
+            return navigate(`/${ROLES[user?.role]}`)
         }
         } catch (error) {
 

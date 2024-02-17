@@ -5,7 +5,6 @@ function useOutsideClick(handler, listenCapturing = true) {
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       handler();
-      console.log("click");
     }
   };
 

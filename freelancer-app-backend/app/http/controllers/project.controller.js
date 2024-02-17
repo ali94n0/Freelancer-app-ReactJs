@@ -61,7 +61,7 @@ class ProjectController extends Controller {
 
     // SORT
     const sortQuery = {};
-    if (!sort) sortQuery["createdAt"] = 1;
+    if (!sort) sortQuery["createdAt"] = -1;
     if (sort) {
       if (sort === "latest") sortQuery["createdAt"] = -1;
       if (sort === "earliest") sortQuery["createdAt"] = 1;
@@ -104,7 +104,7 @@ class ProjectController extends Controller {
     }
 
     const sortQuery = {};
-    if (!sort) sortQuery["createdAt"] = 1;
+    if (!sort) sortQuery["createdAt"] = -1;
     if (sort) {
       if (sort === "latest") sortQuery["createdAt"] = -1;
       if (sort === "earliest") sortQuery["createdAt"] = 1;
