@@ -1,8 +1,8 @@
 
 import { formatPrice, toFarsiNumber } from "../../utils/CostomizePrice";
 import Modal from "../../ui/Modal";
-import {  HiEye, HiOutlineTrash } from "react-icons/hi";
-import {TbPencilMinus} from "react-icons/tb"
+import {  HiEye, HiOutlinePencilAlt, HiOutlineTrash } from "react-icons/hi";
+
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useState } from "react";
 import Table from "../../ui/Table";
@@ -37,7 +37,7 @@ function ProjectRow({project,index}) {
                            <div className="flex items-center gap-x-3">
                                <>
                                    <button onClick={()=>setIsEditOpen(true)} className="py-0.5 px-1">
-                                       <TbPencilMinus className="w-5 h-5 text-primary-900"/>
+                                       <HiOutlinePencilAlt className="w-5 h-5 text-primary-900"/>
                                    </button>
                                    <Modal  isOpen={isEditOpen} onClose={()=>setIsEditOpen(false)} title={project.title} >
                                            <CreateProject onClose={()=>setIsEditOpen(false)} projectToEdit={project}/>

@@ -19,7 +19,7 @@ export const getUser = () => {
 };
 
 export const logoutApi = () => {
-  return http.post("/user/logout").then(({ data }) => data.data);
+  return http.post("/user/logout").then(({ data }) => console.log(data));
 };
 
 export const getAllUsersApi = () => {

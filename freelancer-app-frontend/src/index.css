@@ -106,14 +106,14 @@ outline: none;
   }
   .textField__input{
     
-      @apply w-full py-3 px-4 rounded-lg bg-secondary-100 text-secondary-900 border border-gray-300 hover:border-primary-500 focus:border-primary-500 focus:bg-white transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-100  focus:bg-secondary-0
+      @apply w-full py-3 px-4 rounded-lg bg-secondary-100 text-secondary-900 border border-gray-300 hover:border-primary-500 focus:border-primary-500 focus:bg-white transition-all duration-300 ease-out focus:shadow-lg focus:shadow-primary-100/40  focus:bg-secondary-0
     
   }
   .btn{
     @apply    px-4 py-2 font-bold rounded-lg transition-all duration-300 ease-out
   }
   .btn--primary{
-    @apply  bg-primary-900 text-secondary-100 shadow-primary-200 shadow-lg hover:bg-primary-800 transition-all duration-300 ease-out disabled:bg-primary-100
+    @apply  bg-primary-900 text-secondary-100 shadow-primary-100/40 shadow-lg hover:bg-primary-800 transition-all duration-300 ease-out disabled:bg-primary-100
   }
   .btn--secondary{
     @apply bg-secondary-600 text-secondary-100 px-4 py-2 font-bold rounded-lg  transition-all duration-300 ease-out
