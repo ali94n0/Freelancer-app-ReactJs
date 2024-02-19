@@ -1,6 +1,6 @@
 
 //render textInput
-function TextField({name,label,dir="",type,register,errors,validationSchema}) {
+function TextField({name,label,dir="",type,register,errors,validationSchema={}}) {
 
     return (
         <div className="mb-2">

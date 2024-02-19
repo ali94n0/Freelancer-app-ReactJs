@@ -21,6 +21,7 @@ import Users from "./pages/Users";
 import ProjectsAdmin from "./pages/ProjectsAdmin"
 import ProposalsAdmin from "./pages/ProposalsAdmin";
 import Categories from "./pages/Categories";
+import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="dashboard" element={<ProtectRoute><OwnerDashboard/></ProtectRoute>}/>
         <Route path="projects" element={<Projects/>}/>
         <Route path="projects/:id" element={<Project/>}/>
+        <Route path="profile" element={<Profile/>}/>
       </Route>
       <Route path="/freelancer" element={<ProtectRoute><FreelancerLayout/></ProtectRoute>}>
         <Route index element={<Navigate to={"dashboard"}/>}/>

@@ -19,7 +19,7 @@ export const getUser = () => {
 };
 
 export const logoutApi = () => {
-  return http.post("/user/logout").then(({ data }) => console.log(data));
+  return http.post("/user/logout").then(({ data }) => data.data);
 };
 
 export const getAllUsersApi = () => {
@@ -30,4 +30,8 @@ export const changeUserStatusApi = ({ id, data }) => {
   return http
     .patch(`/admin/user/verify/${id}`, data)
     .then(({ data }) => data.data);
+};
+
+export const updateUserApi = (data) => {
+  return http.patch("/user/update", data).then(({ data }) => data.data);
 };

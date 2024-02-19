@@ -59,7 +59,7 @@ function CompleteProfileForm() {
             required:"ایمیل الزامی است",
             pattern:{
                 value:regEx,
-                message:"عبارت وارد شده نامعتبر است"
+                message:"ایمیل وارد شده نامعتبر است"
             }
         }} dir="dir__ltr"/>
         <div className="flex w-full gap-x-6 py-1 px-2 items-center justify-start">

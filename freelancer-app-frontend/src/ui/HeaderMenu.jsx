@@ -11,7 +11,7 @@ function HeaderMenu() {
         <div>
             <ul className="flex items-center gap-x-3">
                 <li className="flex">
-                    <Link to={"owner"}>
+                    <Link to={"profile"}>
                         <HiOutlineUser className="w-6 h-6 text-primary-900" />
                     </Link>
                 </li>
