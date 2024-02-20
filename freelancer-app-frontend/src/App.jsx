@@ -22,6 +22,7 @@ import ProjectsAdmin from "./pages/ProjectsAdmin"
 import ProposalsAdmin from "./pages/ProposalsAdmin";
 import Categories from "./pages/Categories";
 import Profile from "./pages/Profile";
+import { MenuProvider } from "./context/MenuProvider";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,8 @@ function App() {
   
   return (
     <>
+    {/* hamburgerMenu provider */}
+    <MenuProvider>
     {/* darkmode provider */}
     <DarkModeProvider>
     {/* provider client for reactQuery */}
@@ -49,6 +52,7 @@ function App() {
         <Route path="projects" element={<ProjectsAdmin/>}/>
         <Route path="proposals" element={<ProposalsAdmin/>}/>
         <Route path="categories" element={<Categories/>}/>
+        <Route path="profile" element={<Profile/>}/>
       </Route>
       <Route path="/owner" element={<OwnerLayout/>}>
         <Route index  element={<Navigate to={"dashboard"} replace/>}/>
@@ -62,11 +66,13 @@ function App() {
         <Route path="dashboard" element={<FreelancerDashboard/>}/>
         <Route path="projects" element={<ProjectsFreelancer/>}/>
         <Route path="proposals" element={<Proposals/>}/>
+        <Route path="profile" element={<Profile/>}/>
       </Route>
       <Route path="*" element={<NotFound/>}/>
     </Routes>
     </QueryClientProvider>
       </DarkModeProvider>
+      </MenuProvider>
       </>
   );
 }

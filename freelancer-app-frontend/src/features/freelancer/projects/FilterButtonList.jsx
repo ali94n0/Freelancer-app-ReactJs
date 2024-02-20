@@ -14,7 +14,7 @@ const clickHandler = (e)=>{
 
     return (
             <div className="flex items-center gap-x-2">
-                <span className="text-sm text-secondary-600 ">وضعیت :</span>
+                <span className="text-xs lg:text-sm text-secondary-600 ">وضعیت :</span>
         <div className=" flex p-1 items-center gap-x-1  bg-secondary-0 rounded-lg border border-secondary-300 ">
 
             {options.map(option=>{

@@ -1,19 +1,29 @@
 import { useMutation } from "@tanstack/react-query";
 import CheckOTPForm from "../features/authentication/CheckOTPForm";
 import SendOTPForm from "../features/authentication/SendOTPForm";
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import toast from "react-hot-toast";
 import { getOtp } from "../services/authService";
 import { useForm } from "react-hook-form";
+import useUser from "../features/authentication/useUser";
+import { useNavigate } from "react-router-dom";
 
 
 function Auth() {
+    const navigate=useNavigate()
+    const {user}=useUser()
     const [step,setStep] = useState(1)
     const {register,getValues,handleSubmit,formState:{errors}}=useForm()
-    
     const {isPending:isSendingOtp,mutateAsync,data:otpResponse}=useMutation({
         mutationFn:getOtp,
     })
+
+    // check if user access to the auth route? 
+    useEffect(()=>{
+        if(user){
+            navigate(`/${user.role.toLowerCase()}/dashboard`,{replace:true})
+        }
+        },[user,navigate])
     
     //send phoneNumber to get new OTP token
         const  sendOtpHandler= async ()=>{
@@ -43,7 +53,7 @@ function Auth() {
 
     return (
     <div className="w-full h-screen bg-secondary-0">
-        <div className="container xl:max-w-screen-xl flex justify-center ">
+        <div className="md:container xl:max-w-screen-xl flex justify-center ">
 
 <div className=" w-full mt-20 py-5 sm:max-w-sm">{renderStep()}</div>
 </div>

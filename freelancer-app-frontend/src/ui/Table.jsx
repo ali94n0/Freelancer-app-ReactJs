@@ -14,7 +14,7 @@ export default Table;
 
 function tableHeader ({children}){
     return(
-        <tr className="table-row ">{children}</tr>
+        <tr className="table-row  ">{children}</tr>
     )
 }
 function tableBody({children}){
